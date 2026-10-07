@@ -1,14 +1,31 @@
-# Plan
+# Plan — Arquitetura e decisões
  
 Os valores da variante estão no `spec.md`.
  
+## Stack
+ 
+* Python 3.11 + FastAPI + uvicorn (justificativa: rápido de gerar e testar; contrato REST claro).
+* Persistência em memória 
+* Porta 8001 (`PORTA_SERVICO` da variante).
+
+
+## Estrutura de arquivos a gerar
+ 
+```
+main.py          # app FastAPI, rotas
+models.py        # dataclass Bilhete
+service.py       # regras de negócio (minutos, valor, relatório)
+store.py         # repositório em memória
+test_app.py      # testes pytest (refletem tests.md)
+requirements.txt # dependências
+Containerfile    # roda o serviço na porta 8001
+README.md        # como instalar, rodar e testar
+```
+
 ## Decisões
  
-| Decisão | Escolha | Por quê |
-| --- | --- | --- |
-| Dinheiro | Sempre centavos inteiros, nunca decimal | Com decimal o erro de arredondamento acumula (0.1 + 0.2 ≠ 0.3). Com inteiros esse bug não existe.[^centavos] |
-| Testar com tempo | Usar o campo `entrada` opcional do UC1 | Sem ele, testar fração e teto exigiria esperar tempo real. Com ele, dá para abrir o bilhete no passado. |
-| Fuso | Datas sempre em `-03:00` | É o fuso que o contrato pede nas respostas. |
-| Porta | 8001 | É a `PORTA_SERVICO` da variante. |
-| Linguagem | Livre | O enunciado não define linguagem. O agente escolhe uma e usa o linter dela. |
- 
+1. Valores sempre em centavos inteiros, nunca decimal
+2. Frações cobradas: `n = ceil(minutos / 15)` com divisão inteira; valor = `min(n * 100, 6000)`, e 0 se `minutos <= 0`.
+3. Erros devolvidos como `{"erro": "<codigo>"}` por um tratamento único (justificativa: o contrato exige esse formato).
+4. Tempo médio do relatório com 0,5 para cima, calculado com inteiros (justificativa: o contrato manda 2,5 virar 3).
+5. `entrada` opcional do UC1 usada nos testes.

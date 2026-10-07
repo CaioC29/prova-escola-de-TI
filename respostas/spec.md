@@ -4,7 +4,7 @@
 
 **UC1 — Abrir bilhete**
 
-`POST /bilhetes` com `{"placa": "ABC1D23"}` e, se quiser, `"entrada"`.
+`POST /bilhetes` com `{"placa": "ABC1D23"}` o body aceita `"entrada"` opcional.
 
 -   Resposta **201**: `{"id", "placa", "entrada", "status": "aberto"}`.
 -   Sem `entrada`, usa a hora atual.

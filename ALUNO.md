@@ -2,9 +2,9 @@
 
 # ALUNO
 
-Nome: Caioba
+Nome: Caio Carneiro Germani
 
-RA: >>> PREENCHER <<<
+RA: 23155074-2
 
 Conta GitHub: @CaioC29
 

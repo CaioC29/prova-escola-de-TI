@@ -10,6 +10,17 @@
 6. O contrato manda sobre qualquer exemplo. O exemplo do UC2 no enunciado (`{"id": 7, "valor": 12.50}`) está errado e não deve ser seguido.
 
 
+## Parâmetros da variante
+ 
+| Parâmetro | Valor | Para que serve |
+| --- | --- | --- |
+| `TARIFA_HORA_CENTAVOS` | 400 | preço da hora cheia |
+| `FRACAO_MINUTOS` | 15 | de quantos em quantos minutos cobra |
+| `TETO_DIARIO_CENTAVOS` | 6000 | o máximo que um bilhete pode custar |
+| `TOLERANCIA_MINUTOS` | 0 | minutos grátis |
+| `PORTA_SERVICO` | 8001 | porta do servidor |
+
+
 
 
 
